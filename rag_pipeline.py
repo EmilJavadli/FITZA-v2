@@ -2,6 +2,7 @@ from embed_store import get_embeddings
 import google.generativeai as genai
 import os
 from dotenv import load_dotenv
+import streamlit as st
 
 def retrieve_context(query, index, texts, k=3):
     query_embedding = get_embeddings([query])
@@ -27,9 +28,9 @@ def build_dynamic_prompt(context_records, user_query):
 
 
 def generate_answer(context_records, query):
-    load_dotenv()
-    gemini_api_key = os.getenv("GOOGLE_API_KEY")
-    genai.configure(api_key=gemini_api_key)
+    # load_dotenv()
+    # gemini_api_key = os.getenv("GOOGLE_API_KEY")
+    genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
     llm = genai.GenerativeModel('gemini-2.0-flash')
     prompt = build_dynamic_prompt(context_records, query)
     response = llm.generate_content(prompt)
