@@ -1,7 +1,7 @@
 from embed_store import get_embeddings
 import google.generativeai as genai
 import os
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import streamlit as st
 
 def retrieve_context(query, index, texts, k=3):
