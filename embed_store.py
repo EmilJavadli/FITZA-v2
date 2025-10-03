@@ -19,7 +19,6 @@ def chunk_texts(texts, chunk_size=500, chunk_overlap=50):
         all_chunks.extend(chunks)
     return all_chunks
 
-
 def get_embeddings(texts):
     texts = [f"Represent this sentence for retrieval: {text}" for text in texts]
     embeddings = embedding_model.encode(texts, convert_to_numpy=True, normalize_embeddings=True)
