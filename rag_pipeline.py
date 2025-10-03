@@ -4,11 +4,11 @@ import os
 # from dotenv import load_dotenv
 import streamlit as st
 
-def retrieve_context(query, index, texts, k=3):
-    query_embedding = get_embeddings([query])
-    D, I = index.search(query_embedding, k)
-    return [texts[i] for i in I[0]]
 
+def retrieve_context(query, index, chunks, k=3):
+    query_embedding = get_embeddings([f"Represent this sentence for retrieval: {query}"])
+    D, I = index.search(query_embedding, k)
+    return [chunks[i] for i in I[0]]
 
 def build_dynamic_prompt(context_records, user_query):
     context_text = "\n".join([f"- {record}" for record in context_records])
@@ -25,7 +25,6 @@ def build_dynamic_prompt(context_records, user_query):
     )
 
     return prompt
-
 
 def generate_answer(context_records, query):
     # load_dotenv()
